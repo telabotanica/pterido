@@ -5,19 +5,8 @@ session_start();
 require './scripts/MesFonctions.php';
 require_once('./scripts/PF.php');
 
-// Initialisations anti-notices
-$Genre = null;
-$Espece = null;
-$Famille = null;
-$Rang = null;
-$LivreRouge = null;
-$Contributeur = null;
-$Commune = null;
-$NumTaxon = null;
-$jour = null;
-$date_saisie = null;
-$dep = null;
-$w = null;
+$date_saisie = isset($_REQUEST['date_saisie']) ? $_REQUEST['date_saisie'] : null;
+$jour = isset($_REQUEST['jour']) ? $_REQUEST['jour'] : null;
 
 if ($Genre=="-- Indifférent --") {$Genre="%";} 
 if ($Espece=="-- Indifférent --") {$Espece="%";}
@@ -242,7 +231,7 @@ else
 				
 				do {  
 					$tab[$i]=$row_Trouve['NumTaxon'];
-					if ($tab[$i-1] != $row_Trouve['NumTaxon']) { // ******* début ?>
+					if ($i-1 == 0 || $tab[$i-1] != $row_Trouve['NumTaxon']) { // ******* début ?>
 				<tr>
 					<td ></td>
 					<td height="30" align="center" colspan="2"><hr width="650"></td>
@@ -295,7 +284,7 @@ else
 					?>
 					</font></td>
 					<td width="50" valign="middle" align="right">
-					<? if ((($_SESSION['privilege'] == 'admin') && ($w == 1)) || (($_SESSION['id_contributeurs'] == $row_Trouve['id_contributeurs']) && ($w == 1))) 
+					<? if (((isset($_SESSION['privilege']) && $_SESSION['privilege'] == 'admin') && ($w == 1)) || ((isset($_SESSION['id_contributeurs']) && $_SESSION['id_contributeurs'] == $row_Trouve['id_contributeurs']) && ($w == 1))) 
 						{
 						?>
 						<!-- *************************   modification  ****************************-->

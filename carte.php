@@ -2,6 +2,8 @@
 //recherche des départements du taxon
 require_once('./scripts/PF.php');
 
+$NumTaxon = isset($_REQUEST['NumTaxon']) ? $_REQUEST['NumTaxon'] : null;
+
 mysql_select_db($database_PF, $PF);
 $query_RechercherDepartement = "SELECT distinct num_departements FROM communes, contributions where communes.code_insee = contributions.code_insee and NumTaxon = '$NumTaxon'";
 $RechercherDepartement = mysql_query($query_RechercherDepartement, $PF) or die(mysql_error());
@@ -148,7 +150,7 @@ switch ($dep)
 
 header("Content-type: image/jpeg");	
 
-	Imagejpeg($im, "", 80);
+	Imagejpeg($im, null, 80);
 	ImageDestroy($im);
 
 mysql_free_result($RechercherDepartement);

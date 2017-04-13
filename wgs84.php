@@ -2,6 +2,7 @@
 
 require_once('./scripts/PF.php');
 
+$NumTaxon = isset($_REQUEST['NumTaxon']) ? $_REQUEST['NumTaxon'] : null;
 
 mysql_select_db($database_PF, $PF);
 $query_RechercherCommune = "SELECT * FROM communes, contributions where communes.code_insee = contributions.code_insee and NumTaxon = '$NumTaxon'";
@@ -43,7 +44,7 @@ do {
 // on affiche l'image
 header("Content-type: image/jpeg");	
 
-	Imagejpeg($image, "", 90);
+	Imagejpeg($image, null, 90);
 	ImageDestroy($image);
 
 
