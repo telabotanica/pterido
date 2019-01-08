@@ -31,7 +31,7 @@ else { // si la session n'est pas ok, on demande de se connecter
 				
 					
 					if ($utilisateur == 1) {	// On test s'il y a un utilisateur correspondant
-						session_register("authentification"); // enregistrement de la session
+						$_SESSION["authentification"] = array('codeencarton'); // enregistrement de la session
 						
 						// déclaration des variables de session
 						$_SESSION['privilege'] = $row_verif['privilege']; // le privilège de l'utilisateur (permet de définir des niveaux d'utilisateur)
